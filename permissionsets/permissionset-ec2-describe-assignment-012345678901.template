@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Assign EC2DescribeOnly Permission Set to 012345678901
+Parameters:
+  InstanceArn:
+    Type: String
+    Description: SSO Instance ARN
+  TargetUser:
+    Type: String
+    Description: PrincipalId
+  TargetAccountId:
+    Type: String
+    Description : TargetAccountId
+
+Resources:
+  PermissionsetEc2DescribeAssignment012345678901:
+    Type: AWS::SSO::Assignment
+    Properties:
+      InstanceArn: !Ref InstanceArn
+      PermissionSetArn: !ImportValue PermissionSetArn
+      PrincipalId: !Ref TargetUser
+      PrincipalType: USER
+      TargetId: !Ref TargetAccountId
+      TargetType: AWS_ACCOUNT
+
+Outputs:
+  PermissionSetArn:
+    Description: Imported Permission Set ARN
+    Value: !ImportValue PermissionSetArn

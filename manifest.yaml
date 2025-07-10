@@ -1,0 +1,76 @@
+region: ap-northeast-2
+version: 2021-03-15
+
+resources:
+  # Preventive SCP: Prevent deleting/disabling resources in member accounts
+  - name: cfct-custom-scp-preventive-controls
+    resource_file: scp/preventive-controls.json
+    deployment_targets:
+      organizational_units:
+        - <your-ou>
+    deploy_method: scp
+    regions:
+      - ap-northeast-2
+
+  # Config Rule: Access keys must be rotated within 24 hours
+  - name: cfct-custom-config-accesskeys-rotated
+    resource_file: config/rule-accesskeys-rotated.template
+    parameters:
+      - parameter_key: maxAccessKeyAge
+        parameter_value: "24"
+    deploy_method: stack_set
+    deployment_targets: 
+      organizational_units:
+        - <your-ou>
+    regions:
+      - ap-northeast-2
+
+  # Custom CloudFormation Resource: Additional IAM Role for EC2-Describe
+  - name: cfct-custom-iam-role-ec2-describe
+    resource_file: iam/role-ec2-describe.template
+    deploy_method: stack_set
+    deployment_targets:
+      organizational_units:
+        - <your-ou>
+    regions:
+      - ap-northeast-2
+
+  # EC2 Describe Policy Permission Set Policy
+  - name: cfct-custom-permissionset-policy-ec2-describe
+    resource_file: permissionsets/policy-ec2-describe.template
+    deploy_method: stack_set
+    deployment_targets:
+      organizational_units:
+        - <your-ou>
+    regions:
+      - ap-northeast-2
+
+  # EC2 Describe Permission Set
+  - name: cfct-custom-permissionset-ec2-describe
+    resource_file: permissionsets/permissionset-ec2-describe.template
+    parameters:
+      - parameter_key: InstanceArn
+        parameter_value: "arn:aws:sso:::instance/ssoins-<your-ssoInstanceID>"
+    deploy_method: stack_set
+    deployment_targets:
+      accounts: 
+        - <your-masterAccount>
+    regions:
+      - ap-northeast-2
+
+  # EC2 Describe Permission Set Assignment (Account 012345678901)
+  - name: cfct-custom-permissionset-ec2-describe-assignment-012345678901
+    resource_file: permissionsets/permissionset-ec2-describe-assignment-012345678901.template
+    parameters:
+      - parameter_key: InstanceArn
+        parameter_value: "arn:aws:sso:::instance/ssoins-<your-ssoInstanceID>"
+      - parameter_key: TargetUser
+        parameter_value: "<your-sso-user-ID>" # User생성은 Cloudformation에서 미지원
+      - parameter_key: TargetAccountId
+        parameter_value: "<your-targetAccount>"
+    deploy_method: stack_set
+    deployment_targets:
+      accounts: 
+        - <your-masterAccount>
+    regions:
+      - ap-northeast-2

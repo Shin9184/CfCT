@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: EC2 Describe Permission Set
+Parameters:
+  InstanceArn:
+    Type: String
+    Description: SSO Instance ARN
+
+Resources:
+  PermissionsetEc2Describe:
+    Type: AWS::SSO::PermissionSet
+    Properties:
+      Name: permissionset-ec2-describe
+      Description: EC2 Describe Permission Set
+      InstanceArn: !Ref InstanceArn
+      SessionDuration: PT8H
+      ManagedPolicies:
+        - arn:aws:iam::aws:policy/ReadOnlyAccess
+      CustomerManagedPolicyReferences:
+        - Name: policy-ec2-describe
+          Path: /
+
+Outputs:
+  PermissionSetArn:
+    Description: ARN of the created Permission Set
+    Value: !GetAtt PermissionsetEc2Describe.PermissionSetArn
+    Export:
+      Name: PermissionSetArn

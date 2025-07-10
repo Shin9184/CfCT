@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: EC2 Describe Policy
+
+Resources:
+  PolicyEC2Describe:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: policy-ec2-describe
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - ec2:Describe*
+            Resource: "*"
