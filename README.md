@@ -1,5 +1,5 @@
 # AWS CfCT 를 통한 PermissionSets, SCP, Config 관리 - GitOps 방식의 인프라 운영
-**Customizations for AWS Control Tower(CfCT)**는 AWS Control Tower와 여러 서비스를 결합하여, 멀티 계정 환경에 조직 맞춤형 리소스를 자동으로 배포할 수 있도록 지원하는 솔루션입니다.
+**Customizations for AWS Control Tower(CfCT)** 는 AWS Control Tower와 여러 서비스를 결합하여, 멀티 계정 환경에 조직 맞춤형 리소스를 자동으로 배포할 수 있도록 지원하는 솔루션입니다.
 이 프로젝트는 **AWS Control Tower**와 **CfCT(Customizations for AWS Control Tower)** 를 활용하여 조직의 **IAM Role**, **PermissionSet**, **SCP**, **AWS Config Rule** 등을 GitOps 방식으로 자동 배포하는 구조입니다.
 
 ## 목차
