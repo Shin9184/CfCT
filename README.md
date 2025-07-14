@@ -1,10 +1,12 @@
 # AWS CfCT 를 통한 PermissionSets, SCP, Config 관리 - GitOps 방식의 인프라 운영
 **Customizations for AWS Control Tower(CfCT)** 는 AWS Control Tower와 여러 서비스를 결합하여, 멀티 계정 환경에 조직 맞춤형 리소스를 자동으로 배포할 수 있도록 지원하는 솔루션입니다.
 이 프로젝트는 **AWS Control Tower**와 **CfCT(Customizations for AWS Control Tower)** 를 활용하여 조직의 **IAM Role**, **PermissionSet**, **SCP**, **AWS Config Rule** 등을 GitOps 방식으로 자동 배포하는 구조입니다.
+자세한 내용은 [CfCT](https://velog.io/@dongs52/AWS-CfCT-%EB%A5%BC-%ED%86%B5%ED%95%9C-PermissionSets-SCP-Config-%EA%B4%80%EB%A6%AC-GitOps-%EB%B0%A9%EC%8B%9D%EC%9D%98-%EC%9D%B8%ED%94%84%EB%9D%BC-%EC%9A%B4%EC%98%81) 저의 블로그를 참고하며 진행하시면 도움이 됩니다.
 
 ## 목차
 - [프로젝트 목적](#프로젝트-목적)
 - [아키텍처](#아키텍처)
+- [결과 화면](#결과-화면)
 - [프로젝트 구조](#프로젝트-구조)
 - [배포 방법](#배포-방법)
 - [주의 사항](#주의-사항)
@@ -17,6 +19,24 @@
 
 ## 아키텍처
 ![아키텍처](images/customizations-for-aws-control-tower-architecture-diagram.png)
+
+## 결과 화면
+Source 단계에서 Github의 업데이트 된 내용으로 각 단계 별 Build & Cloudformation Stack_set 배포가 완료 된 결과입니다.
+![배포](images/deploy.png)
+
+SCP 배포 결과
+![scp](images/scp.png)
+
+Config 배포 결과
+![config](images/config.png)
+
+IAM 배포 결과
+![iam-role](images/iam-role.png)
+![iam-policy](images/iam-policy.png)
+
+Permission Sets 배포 결과
+![permissionset](images/permissionset.png)
+
 
 ## 프로젝트 구조
 ```tree
